@@ -1,7 +1,13 @@
 # Echidna action
 
 This action allows you to run `echidna-test` from within a GitHub Actions
-workflow.
+workflow. The action builds on the `trailofbits/echidna` Docker image, adding
+`solc-select` and providing a simpler way to execute Echidna as part of an
+Actions workflow.
+
+To learn more about [Echidna](https://github.com/crytic/echidna) itself, visit
+its [GitHub repository](https://github.com/crytic/echidna) and [wiki
+pages](https://github.com/crytic/echidna/wiki).
 
 ## Inputs
 
