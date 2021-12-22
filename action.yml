@@ -54,9 +54,16 @@ inputs:
   solc-version:
     description: "Version of the Solidity compiler to use"
     required: false
+  output-file:
+    description: "Capture echidna's output into this file. The path must be relative to the repository root."
+    required: false
   negate-exit-status:
     description: "Apply logical NOT to echidna-test's exit status (for testing the action)"
     required: false
+
+outputs:
+  output-file:
+    description: "If produced, the file containing echidna-test's output, relative to the repository root."
 
 runs:
   using: "docker"

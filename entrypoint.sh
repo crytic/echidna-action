@@ -40,6 +40,13 @@ fi
 
 echo "${CMD[@]}" >&2
 
+OUTPUT_FILE="$(get 'INPUT_OUTPUT-FILE')"
+if [[ -n "$OUTPUT_FILE" ]]; then
+    echo "::set-output name=output-file::$OUTPUT_FILE"
+    # tee stdout to $OUTPUT_FILE to capture echidna's output
+    exec > >(tee "$OUTPUT_FILE")
+fi
+
 if [[ -n "$(get 'INPUT_NEGATE-EXIT-STATUS')" ]]; then
     ! "${CMD[@]}"
 else
