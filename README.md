@@ -31,6 +31,7 @@ pages](https://github.com/crytic/echidna/wiki).
 | `solc-args`          | Additional arguments to use in solc for the compilation of the contract to test.
 | `solc-version`       | Version of the Solidity compiler to use.
 | `output-file`        | Capture echidna-test's output into a file. The path must be relative to the repository root.
+| `echidna-version`    | Version of the Echidna Docker image to use.
 | `negate-exit-status` | Apply logical NOT to echidna-test's exit status (for testing the action).
 
 ## Outputs
