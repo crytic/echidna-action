@@ -1,6 +1,6 @@
-name: "Echidna"
+name: "echidna-action"
 
-description: "Run echidna-test"
+description: "Run Echidna, the smart contract fuzzer"
 
 inputs:
   files:
@@ -68,3 +68,7 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+
+branding:
+  icon: 'shield'  
+  color: 'red'
