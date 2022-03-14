@@ -18,7 +18,7 @@ pages](https://github.com/crytic/echidna/wiki).
 | `config`             | Config file (CLI arguments override config options).
 | `format`             | Output format: json, text, none. Disables interactive UI.
 | `corpus-dir`         | Directory to store corpus and coverage data.
-| `check-asserts`      | Check asserts in the code.
+| `test-mode`          | Type of tests to be performed: property, assertion, overflow, optimization, exploration.
 | `multi-abi`          | Use multi-abi mode of testing.
 | `test-limit`         | Number of sequences of transactions to generate during testing.
 | `shrink-limit`       | Number of tries to attempt to shrink a failing sequence of transactions.
