@@ -1,6 +1,10 @@
-name: "Echidna"
+name: "echidna-action"
 
-description: "Run echidna-test"
+description: "Run Echidna, the smart contract fuzzer"
+
+branding:
+  icon: 'shield'  
+  color: 'red'
 
 inputs:
   files:
