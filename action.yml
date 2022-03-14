@@ -2,6 +2,10 @@ name: "echidna-action"
 
 description: "Run Echidna, the smart contract fuzzer"
 
+branding:
+  icon: 'shield'  
+  color: 'red'
+
 inputs:
   files:
     description: "Solidity files to analyze"
@@ -60,15 +64,47 @@ inputs:
   negate-exit-status:
     description: "Apply logical NOT to echidna-test's exit status (for testing the action)"
     required: false
+  echidna-version:
+    description: "Version of the Echidna Docker image to use"
+    required: false
+    default: latest
 
 outputs:
   output-file:
     description: "If produced, the file containing echidna-test's output, relative to the repository root."
+    value: ${{ steps.echidna.outputs.output-file }}
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
-
-branding:
-  icon: 'shield'  
-  color: 'red'
+  using: "composite"
+  steps:
+    - run: |
+        # echidna-action Docker container build
+        docker build -t echidna-action-image:$ECHIDNA_TAG --build-arg ECHIDNA_TAG ${{ github.action_path }}
+      shell: bash
+      env:
+        ECHIDNA_TAG: ${{ inputs.echidna-version }}
+    - id: echidna
+      run: |
+        # echidna campaign
+        ${{ github.action_path }}/launch.sh echidna-action-image:${{ inputs.echidna-version }}
+      shell: bash
+      env:
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_CONTRACT: ${{ inputs.contract }}
+        INPUT_CONFIG: ${{ inputs.config }}
+        INPUT_FORMAT: ${{ inputs.format }}
+        INPUT_CORPUS-DIR: ${{ inputs.corpus-dir }}
+        INPUT_CHECK-ASSERTS: ${{ inputs.check-asserts }}
+        INPUT_MULTI-ABI: ${{ inputs.multi-abi }}
+        INPUT_TEST-LIMIT: ${{ inputs.test-limit }}
+        INPUT_SHRINK-LIMIT: ${{ inputs.shrink-limit }}
+        INPUT_SEQ-LEN: ${{ inputs.seq-len }}
+        INPUT_CONTRACT-ADDR: ${{ inputs.contract-addr }}
+        INPUT_DEPLOYER: ${{ inputs.deployer }}
+        INPUT_SENDER: ${{ inputs.sender }}
+        INPUT_SEED: ${{ inputs.seed }}
+        INPUT_CRYTIC-ARGS: ${{ inputs.crytic-args }}
+        INPUT_SOLC-ARGS: ${{ inputs.solc-args }}
+        INPUT_SOLC-VERSION: ${{ inputs.solc-version }}
+        INPUT_OUTPUT-FILE: ${{ inputs.output-file }}
+        INPUT_NEGATE-EXIT-STATUS: ${{ inputs.negate-exit-status }}
