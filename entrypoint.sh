@@ -47,6 +47,11 @@ if [[ -n "$OUTPUT_FILE" ]]; then
     exec > >(tee "$OUTPUT_FILE")
 fi
 
+WORKDIR="$(get 'INPUT_ECHIDNA-WORKDIR')"
+if [[ -n "$WORKDIR" ]]; then
+    cd "$WORKDIR"
+fi
+
 if [[ -n "$(get 'INPUT_NEGATE-EXIT-STATUS')" ]]; then
     ! "${CMD[@]}"
 else
