@@ -22,8 +22,8 @@ inputs:
   corpus-dir:
     description: "Directory to store corpus and coverage data"
     required: false
-  check-asserts:
-    description: "Check asserts in the code"
+  test-mode:
+    description: "Type of tests to be performed"
     required: false
   multi-abi:
     description: "Use multi-abi mode of testing"
@@ -94,7 +94,7 @@ runs:
         INPUT_CONFIG: ${{ inputs.config }}
         INPUT_FORMAT: ${{ inputs.format }}
         INPUT_CORPUS-DIR: ${{ inputs.corpus-dir }}
-        INPUT_CHECK-ASSERTS: ${{ inputs.check-asserts }}
+        INPUT_TEST-MODE: ${{ inputs.test-mode }}
         INPUT_MULTI-ABI: ${{ inputs.multi-abi }}
         INPUT_TEST-LIMIT: ${{ inputs.test-limit }}
         INPUT_SHRINK-LIMIT: ${{ inputs.shrink-limit }}

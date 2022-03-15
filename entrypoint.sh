@@ -4,10 +4,10 @@ set -eu
 
 export PYTHONPATH=/root/.local/lib/python3.6/site-packages
 
-OPTIONS="contract config format corpus-dir test-limit shrink-limit seq-len \
-contract-addr deployer sender seed crytic-args solc-args"
+OPTIONS="contract config format corpus-dir test-limit test-mode shrink-limit \
+seq-len contract-addr deployer sender seed crytic-args solc-args"
 
-SWITCHES="check-asserts multi-abi"
+SWITCHES="multi-abi"
 
 # smoelius: `get` works for non-standard variable names like `INPUT_CORPUS-DIR`.
 get() {
