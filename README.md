@@ -46,7 +46,7 @@ pages](https://github.com/crytic/echidna/wiki).
 ### Basic usage
 
 ```yaml
-uses: crytic/echidna-action@v1
+uses: crytic/echidna-action@v2
 with:
   files: contracts/
   contract: Marketplace
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       with:
@@ -92,7 +92,7 @@ jobs:
     - name: Compile contracts
       run: npx hardhat compile
     - name: Run Echidna
-      uses: crytic/echidna-action@v1
+      uses: crytic/echidna-action@v2
       with:
         solc-version: 0.7.6
         files: .
