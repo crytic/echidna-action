@@ -68,6 +68,9 @@ inputs:
     description: "Version of the Echidna Docker image to use"
     required: false
     default: latest
+  echidna-workdir:
+    description: "Path to run echidna-test from. Note that `files` and `config` are relative to this path"
+    required: false
 
 outputs:
   output-file:
@@ -108,3 +111,4 @@ runs:
         INPUT_SOLC-VERSION: ${{ inputs.solc-version }}
         INPUT_OUTPUT-FILE: ${{ inputs.output-file }}
         INPUT_NEGATE-EXIT-STATUS: ${{ inputs.negate-exit-status }}
+        INPUT_ECHIDNA-WORKDIR: ${{ inputs.echidna-workdir }}
