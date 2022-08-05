@@ -2,8 +2,6 @@
 
 set -eu
 
-export PYTHONPATH=/root/.local/lib/python3.6/site-packages
-
 OPTIONS="contract config format corpus-dir test-limit test-mode shrink-limit \
 seq-len contract-addr deployer sender seed crytic-args solc-args"
 
