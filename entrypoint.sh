@@ -32,13 +32,15 @@ for SWITCH in $SWITCHES; do
     fi
 done
 
+echo "Echidna version: $(echidna-test --version)" >&2
+echo "Echidna command line: ${CMD[@]}" >&2
+echo >&2
+
 SOLC_VERSION="$(get 'INPUT_SOLC-VERSION')"
 if [[ -n "$SOLC_VERSION" ]]; then
     solc-select install "$SOLC_VERSION"
     solc-select use "$SOLC_VERSION"
 fi
-
-echo "${CMD[@]}" >&2
 
 OUTPUT_FILE="$(get 'INPUT_OUTPUT-FILE')"
 if [[ -n "$OUTPUT_FILE" ]]; then
