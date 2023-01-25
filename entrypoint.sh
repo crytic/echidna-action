@@ -12,6 +12,18 @@ get() {
     env | sed -n "s/^$1=\(.*\)/\1/;T;p"
 }
 
+compatibility_link()
+{
+    HOST_GITHUB_WORKSPACE="$(get INPUT_INTERNAL-GITHUB-WORKSPACE | tr -d \")"
+    if [[ -d "$GITHUB_WORKSPACE" ]]; then
+        mkdir -p "$(dirname "$HOST_GITHUB_WORKSPACE")"
+        ln -s "$GITHUB_WORKSPACE" "$HOST_GITHUB_WORKSPACE"
+        echo "[-] Applied compatibility link: $HOST_GITHUB_WORKSPACE -> $GITHUB_WORKSPACE"
+    fi
+}
+
+compatibility_link
+
 CMD=(echidna-test "$INPUT_FILES")
 
 for OPTION in $OPTIONS; do
