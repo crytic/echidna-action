@@ -99,3 +99,55 @@ jobs:
         contract: TokenEchidna
         crytic-args: --hardhat-ignore-compile
 ```
+
+### Example workflow: Foundry
+
+The following is a complete GitHub Actions workflow example. It will trigger
+with commits on `main` as well as any pull request opened against the `main`
+branch. It will install Foundry on the runner, and then it will build the
+project (using `forge build --build-info`) and finally run Echidna against a
+contract called `TokenEchidna`. The workflow will fail if Echidna breaks any of
+the invariants in `TokenEchidna`.
+
+In this example, we are leveraging `crytic-args` to pass `--ignore-compile`.
+This skips building the project as part of the Echidna action, and instead takes
+advantage of the already built contracts. This is required, as the Echidna
+action environment does not have `forge` available.
+
+```yaml
+name: Echidna Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  test:      
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+      with:
+        version: nightly
+
+    - name: Compile contracts
+      run: |
+        forge build --build-info
+
+    - name: Run Echidna
+      uses: crytic/echidna-action@v2
+      with:
+        files: .
+        contract: TokenEchidna
+        crytic-args: --ignore-compile
+```
