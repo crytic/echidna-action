@@ -2,8 +2,8 @@
 
 set -eu
 
-OPTIONS="contract config format corpus-dir test-limit test-mode shrink-limit \
-seq-len contract-addr deployer sender seed crytic-args solc-args"
+OPTIONS="contract config format corpus-dir test-limit test-mode rpc-block rpc-url \
+shrink-limit seq-len contract-addr deployer sender seed crytic-args solc-args"
 
 SWITCHES="multi-abi"
 
