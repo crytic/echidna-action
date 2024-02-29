@@ -3,7 +3,7 @@ name: "echidna-action"
 description: "Run Echidna, the smart contract fuzzer"
 
 branding:
-  icon: 'shield'  
+  icon: 'shield'
   color: 'red'
 
 inputs:
@@ -30,6 +30,12 @@ inputs:
     required: false
   test-limit:
     description: "Number of sequences of transactions to generate during testing"
+    required: false
+  rpc-block:
+    description: "Block number to use when fetching over RPC"
+    required: false
+  rpc-url:
+    description: "Fetch contracts over a RPC URL"
     required: false
   shrink-limit:
     description: "Number of tries to attempt to shrink a failing sequence of transactions"
@@ -106,6 +112,8 @@ runs:
         INPUT_TEST-MODE: ${{ inputs.test-mode }}
         INPUT_MULTI-ABI: ${{ inputs.multi-abi }}
         INPUT_TEST-LIMIT: ${{ inputs.test-limit }}
+        INPUT_RPC-BLOCK: ${{ inputs.rpc-block }}
+        INPUT_RPC-URL: ${{ inputs.rpc-url }}
         INPUT_SHRINK-LIMIT: ${{ inputs.shrink-limit }}
         INPUT_SEQ-LEN: ${{ inputs.seq-len }}
         INPUT_CONTRACT-ADDR: ${{ inputs.contract-addr }}
